@@ -262,63 +262,16 @@
      ```
      python manage.py runserver
        ```
+    kemudian buka [localhost](http://localhost:8000/) di browser.
+
+19. Lakukan `add, commit, push` .
     
-## Emphasis
+## Fungsi Git dalam Pengembangan Perangkat Lunak
+Git digunakan untuk version control, memungkinkan tim pengembang untuk melacak perubahan, berkolaborasi, dan mengelola berbagai versi dari proyek perangkat lunak.
 
-*This text will be italic*  
-_This will also be italic_
+## Mengapa Django sebagai Framework Permulaan?
+Django menyediakan struktur yang kuat dan banyak fitur built-in, seperti ORM dan sistem routing, yang membuatnya cocok untuk pemula belajar pengembangan web. 
 
-**This text will be bold**  
-__This will also be bold__
+## Mengapa Django ORM?
+Django ORM (Object-Relational Mapping) memungkinkan pengembang untuk berinteraksi dengan database menggunakan model Python daripada menulis SQL secara langsung, yang menyederhanakan pengelolaan data dan meningkatkan produktivitas.
 
-_You **can** combine them_
-
-## Lists
-
-### Unordered
-
-* Item 1
-* Item 2
-* Item 2a
-* Item 2b
-
-### Ordered
-
-1. Item 1
-2. Item 2
-3. Item 3
-    1. Item 3a
-    2. Item 3b
-
-## Images
-
-![This is an alt text.](/image/sample.webp "This is a sample image.")
-
-## Links
-
-You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
-
-## Blockquotes
-
-> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
->
->> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
-
-## Tables
-
-| Left columns  | Right columns |
-| ------------- |:-------------:|
-| left foo      | right foo     |
-| left bar      | right bar     |
-| left baz      | right baz     |
-
-## Blocks of code
-
-```
-let message = 'Hello world';
-alert(message);
-```
-
-## Inline code
-
-This web site is using `markedjs/marked`.
