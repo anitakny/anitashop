@@ -222,6 +222,7 @@
       ]
        ```
 15. Mengubah file `models.py` dengan :
+    
     ```
     class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -235,8 +236,33 @@
         return self.mood_intensity > 5
 
        ```
-17. 
-   
+16. Migrasi dengan command :
+    
+     ```
+      python manage.py makemigrations
+      python manage.py migrate
+       ```
+17. Menambahkan fungsi untuk me-render laman main pada file `views.py` :
+    ```
+    from django.shortcuts import render
+
+      # Create your views here.
+      def show_main(request):
+          context = {
+              'name': 'Candy Baby Parfum',
+              'price': 'Rp 150.000',  
+              'description': 'Candy Baby adalah body mist yang manis dan menyegarkan, dengan aroma permen kapas yang menggoda dan vanilla yang lembut. Parfum ini memberikan sensasi seperti berada di dunia permen       yang ceria, sempurna untuk mereka yang ingin menonjolkan sisi playful dan feminin. Dengan aroma ringan namun tahan lama, Candy Baby adalah pilihan ideal untuk digunakan sehari-hari.',
+              'quantity': '10',
+          }
+
+    return render(request, "main.html", context)
+      ```
+18. Mengetest aplikasi pada localhost dengan command:
+
+     ```
+     python manage.py runserver
+       ```
+    
 ## Emphasis
 
 *This text will be italic*  
