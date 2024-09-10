@@ -51,7 +51,191 @@
     ```
     python manage.py startapp main
       ```
-10. 
+    
+10. Buat berkas bernama `.gitignore` dan isi dengan :
+    ```
+    # Django
+      *.log
+      *.pot
+      *.pyc
+      __pycache__
+      db.sqlite3
+      media
+      
+      # Backup files
+      *.bak
+      
+      # If you are using PyCharm
+      # User-specific stuff
+      .idea/**/workspace.xml
+      .idea/**/tasks.xml
+      .idea/**/usage.statistics.xml
+      .idea/**/dictionaries
+      .idea/**/shelf
+      
+      # AWS User-specific
+      .idea/**/aws.xml
+      
+      # Generated files
+      .idea/**/contentModel.xml
+      .DS_Store
+      
+      # Sensitive or high-churn files
+      .idea/**/dataSources/
+      .idea/**/dataSources.ids
+      .idea/**/dataSources.local.xml
+      .idea/**/sqlDataSources.xml
+      .idea/**/dynamic.xml
+      .idea/**/uiDesigner.xml
+      .idea/**/dbnavigator.xml
+      
+      # Gradle
+      .idea/**/gradle.xml
+      .idea/**/libraries
+      
+      # File-based project format
+      *.iws
+      
+      # IntelliJ
+      out/
+      
+      # JIRA plugin
+      atlassian-ide-plugin.xml
+      
+      # Python
+      *.py[cod]
+      *$py.class
+      
+      # Distribution / packaging
+      .Python build/
+      develop-eggs/
+      dist/
+      downloads/
+      eggs/
+      .eggs/
+      lib/
+      lib64/
+      parts/
+      sdist/
+      var/
+      wheels/
+      *.egg-info/
+      .installed.cfg
+      *.egg
+      *.manifest
+      *.spec
+      
+      # Installer logs
+      pip-log.txt
+      pip-delete-this-directory.txt
+      
+      # Unit test / coverage reports
+      htmlcov/
+      .tox/
+      .coverage
+      .coverage.*
+      .cache
+      .pytest_cache/
+      nosetests.xml
+      coverage.xml
+      *.cover
+      .hypothesis/
+      
+      # Jupyter Notebook
+      .ipynb_checkpoints
+      
+      # pyenv
+      .python-version
+      
+      # celery
+      celerybeat-schedule.*
+      
+      # SageMath parsed files
+      *.sage.py
+      
+      # Environments
+      .env
+      .venv
+      env/
+      venv/
+      ENV/
+      env.bak/
+      venv.bak/
+      
+      # mkdocs documentation
+      /site
+      
+      # mypy
+      .mypy_cache/
+      
+      # Sublime Text
+      *.tmlanguage.cache
+      *.tmPreferences.cache
+      *.stTheme.cache
+      *.sublime-workspace
+      *.sublime-project
+      
+      # sftp configuration file
+      sftp-config.json
+      
+      # Package control specific files Package
+      Control.last-run
+      Control.ca-list
+      Control.ca-bundle
+      Control.system-ca-bundle
+      GitHub.sublime-settings
+      
+      # Visual Studio Code
+      .vscode/*
+      !.vscode/settings.json
+      !.vscode/tasks.json
+      !.vscode/launch.json
+      !.vscode/extensions.json
+      .history
+       ```
+12. Menambahkan nama aplikasi ke `INSTALLED_APPS` pada file `settings.py` di direktori
+13. Buat direktori baru bernama `templates` di dalam direktori aplikasi `main`, lalu buat berkas baru bernama `main.html` dan isi dengan :
+     ```
+      <h1>Toko Anita</h1>
+
+      <h5>Nama Produk:</h5>
+      <p>{{ name }}</p> 
+      
+      <h5>Harga:</h5>
+      <p>{{ price }}</p> 
+      
+      <h5>Deskripsi:</h5>
+      <p>{{ description }}</p> 
+      
+      <h5>Jumlah:</h5>
+      <p>{{ quantity }}</p>
+
+       ```
+14. Isi file `urls.py` dengan :
+    ```
+      from django.contrib import admin
+      from django.urls import path, include
+      
+      urlpatterns = [
+          path('admin/', admin.site.urls),
+          path('', include('main.urls')),
+      ]
+       ```
+15. Mengubah file `models.py` dengan :
+    ```
+    class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.IntegerField()
+    description = models.TextField()
+    quantity = models.IntegerField(default=0)
+    mood_intensity = models.IntegerField(default=0)
+
+    @property
+    def is_mood_strong(self):
+        return self.mood_intensity > 5
+
+       ```
+17. 
    
 ## Emphasis
 
