@@ -4,8 +4,34 @@
 
 # Tugas 2
 ## Proses Pembuatan Projek Django
-###### This is a Heading h6
 
+1. Buat _repository_ baru dengan nama `anitashop`.
+2. Hubungkan _repository_ dengan local direktori dengan :
+   
+   ```
+   git remote add origin <URL_REPO>
+    ```
+3. Buat virtual environment dengan menjalankan perintah berikut :
+
+   ```
+   python -m venv env
+    ```
+4. Aktifkan virtual environment dengan perintah berikut:
+
+   ```
+   env\Scripts\activate
+    ```
+5. Buat berkas `requirements.txt` dan isi dengan :
+
+    ```
+   django
+    gunicorn
+    whitenoise
+    psycopg2-binary
+    requests
+    urllib3
+    ```
+   
 ## Emphasis
 
 *This text will be italic*  
