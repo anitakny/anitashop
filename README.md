@@ -31,6 +31,27 @@
     requests
     urllib3
     ```
+6. Lakukan instalasi terhadap dependencies yang ada dengan perintah berikut:
+   
+   ```
+   pip install -r requirements.txt
+    ```
+7. Buat proyek Django bernama `toko_anita` dengan perintah berikut:
+   
+   ```
+   django-admin startproject toko_anita .
+    ```
+8. Ubah `ALLOWED_HOSTS` pada file `settings.py` tambahkan dengan string berikut :
+   ```
+      ...
+   ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+   ...
+      ```
+9. Buat aplikasi `main` dengan :
+    ```
+    python manage.py startapp main
+      ```
+10. 
    
 ## Emphasis
 
