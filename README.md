@@ -265,7 +265,11 @@
     kemudian buka [localhost](http://localhost:8000/) di browser.
 
 19. Lakukan `add, commit, push` .
-    
+
+
+## Bagan yang berisi request client
+![URL](https://github.com/user-attachments/assets/8604d46d-3972-409f-b986-ff755e80c105)
+
 ## Fungsi Git dalam Pengembangan Perangkat Lunak
 Git digunakan untuk version control, memungkinkan tim pengembang untuk melacak perubahan, berkolaborasi, dan mengelola berbagai versi dari proyek perangkat lunak.
 
