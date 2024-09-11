@@ -1,6 +1,7 @@
 # Toko Anita
 
 ### Proyek Django sederhana yang diperuntukkan untuk pemenuhan Tugas 2 mata kuliah Pemrograman Berbasis Platfrom oleh Anita Khoirun Nisa dengan NPM 2306152273.
+### Link PWS dapat diakses di [sini](https://anita-khoirun-tokoanita.pbp.cs.ui.ac.id/)
 
 # Tugas 2
 ## Proses Pembuatan Projek Django
