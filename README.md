@@ -43,7 +43,7 @@
     ```
 8. Ubah `ALLOWED_HOSTS` pada file `settings.py` tambahkan dengan string berikut :
    ```
-      ...
+   ...
    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
    ...
       ```
@@ -271,11 +271,12 @@
 ![URL](https://github.com/user-attachments/assets/8604d46d-3972-409f-b986-ff755e80c105)
 
 ## Fungsi Git dalam Pengembangan Perangkat Lunak
-Git digunakan untuk version control, memungkinkan tim pengembang untuk melacak perubahan, berkolaborasi, dan mengelola berbagai versi dari proyek perangkat lunak.
+Git adalah sistem kontrol versi yang membantumu melacak perubahan pada kode sumber proyek. Kita dapat memantau semua perubahan, revisi yang terjadi di proyek kita
+Jadi, git emungkinkan tim untuk melacak perubahan kode, menyimpan versi, dan bekerja bersama dalam proyek secara efisien. Sehingga memainkan peran penting dalam pengembangan perangkat lunak modern dan kolaborasi tim.
 
 ## Mengapa Django sebagai Framework Permulaan?
-Django menyediakan struktur yang kuat dan banyak fitur built-in, seperti ORM dan sistem routing, yang membuatnya cocok untuk pemula belajar pengembangan web. 
+Django menyediakan struktur yang kuat dan banyak fitur built-in, seperti ORM dan sistem routing, yang membuatnya cocok untuk pemula belajar pengembangan web. Selain itu, Django menggunakan bahasa pemrograman Python sehingga lebih mudah dipahami karena bahasa ini memiliki sintaksis yang elegan dengan menggunakan kunci bahasa Inggris yang sederhana. Kerangka kerja web Django mendukung pengembangan cepat dan desain yang bersih dan pragmatis. Langkah-langkah keamanan bawaan Django menawarkan perlindungan yang cukup bagi banyak bisnis dan kerangka kerjanya mudah diperluas untuk memenuhi kebutuhan kepatuhan tambahan juga.
 
 ## Mengapa Django ORM?
-Django ORM (Object-Relational Mapping) memungkinkan pengembang untuk berinteraksi dengan database menggunakan model Python daripada menulis SQL secara langsung, yang menyederhanakan pengelolaan data dan meningkatkan produktivitas.
+Django ORM atau singkatan dari Object-Relational Mapping. Object adalah apa yang kita gunakan dalam bahasa pemrograman, relasi adalah basis data pada proyek sedangkan pemetaan adalah tautan antara keduanya. Django ORM memetakan model-model Python ke tabel-tabel dalam database sehingga memungkinkan manipulasi data yang mudah dan efisien. Lalu, abstraksi yang disediakan oleh Django ORM membantu pengembang fokus pada logika aplikasi dan meningkatkan produktivitas secara keseluruhan.
 
