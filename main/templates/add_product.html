@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tambah Produk Baru</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}  <!-- Menampilkan form penambahan produk sebagai tabel -->
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Tambah Produk" />  <!-- Tombol submit form -->
+      </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}
