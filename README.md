@@ -473,3 +473,20 @@ Sebelumnya kita perlu tau pengertian dari XML dan JSON. XML, atau eXtensible Mar
 Fungsi dari is_valid adalah untuk mencegah input data yang tidak valid atau berpotensi merusak sistem. Validasi yang dilakukan di server mencegah manipulasi data dari sisi klien. Intinya agar program berjalan sesuai dengan apa yang kita inginkan.
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 CSRF token diperlukan saat membuat form di Django untuk melindungi keamanan pengguna dari serangan CSRF (Cross-Site Request Forgery). Jika kita tidak menambahkan csrf_token pada form django aplikasi kita menjadi rentan terhadap serangan CSRF. Ini bisa memungkinkan penyerang untuk mengirimkan permintaan palsu atas nama pengguna yang sah tanpa persetujuan mereka.
+
+## Postman
+### Local
+![image](https://github.com/user-attachments/assets/46842553-9a5d-4062-8d13-ece92cee89a7)
+### show_json
+![image](https://github.com/user-attachments/assets/cc8aaec8-3cc7-40d9-abf9-7f587457da3c)
+### show_json_by_id
+![image](https://github.com/user-attachments/assets/03c84211-6d8b-44b6-911b-972e0335af0c)
+### show_xml
+![image](https://github.com/user-attachments/assets/229c2029-ddb6-4e09-9415-73982a253044)
+### show_xml_by_id
+![image](https://github.com/user-attachments/assets/ba15a0dd-00d8-4352-a334-767a68eadf58)
+
+
+
+
+
