@@ -1,6 +1,6 @@
 # Toko Anita
 
-### Proyek Django sederhana yang diperuntukkan untuk pemenuhan Tugas 2 mata kuliah Pemrograman Berbasis Platfrom oleh Anita Khoirun Nisa dengan NPM 2306152273.
+### Proyek Django sederhana yang diperuntukkan untuk pemenuhan Tugas mata kuliah Pemrograman Berbasis Platfrom oleh Anita Khoirun Nisa dengan NPM 2306152273.
 ### Link PWS dapat diakses di [sini](https://anita-khoirun-tokoanita.pbp.cs.ui.ac.id/)
 
 # Tugas 2
@@ -281,3 +281,195 @@ Django menyediakan struktur yang kuat dan banyak fitur built-in, seperti ORM dan
 ## Mengapa Django ORM?
 Django ORM atau singkatan dari Object-Relational Mapping. Object adalah apa yang kita gunakan dalam bahasa pemrograman, relasi adalah basis data pada proyek sedangkan pemetaan adalah tautan antara keduanya. Django ORM memetakan model-model Python ke tabel-tabel dalam database sehingga memungkinkan manipulasi data yang mudah dan efisien. Lalu, abstraksi yang disediakan oleh Django ORM membantu pengembang fokus pada logika aplikasi dan meningkatkan produktivitas secara keseluruhan.
 
+# Tugas 3
+## Proses Pembuatan Projek Django
+
+1. Buat direktori baru bernama `templates` di dalam `root folder`, lalu buat berkas baru bernama `base.html` dan isi dengan :
+   ```
+      {% load static %}
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          {% block meta %} {% endblock meta %}
+        </head>
+      
+        <body>
+          {% block content %} {% endblock content %}
+        </body>
+      </html>
+   ```
+2. Buka file bernama `settings.py` yang ada di dalam direktori proyek `toko_anita`, lalu sesuaikan :
+    ```
+      ...
+      TEMPLATES = [
+          {
+              'BACKEND': 'django.template.backends.django.DjangoTemplates',
+              'DIRS': [BASE_DIR / 'templates'], # Tambahkan konten baris ini
+              'APP_DIRS': True,
+              ...
+          }
+      ]
+      ...
+    ```
+3. Ubah kode pada berkas `main.html` menjadi :
+   ```
+      {% extends 'base.html' %}
+       {% block content %}
+       <h1>Toko Anita</h1>
+      
+       <h5>Nama Produk:</h5>
+        <p>{{ name }}</p>
+      
+        <h5>Deskripsi:</h5>
+        <p>{{ description }}</p>
+      
+        <h5>Jumlah:</h5>
+        <p>{{ quantity }}</p>
+       {% endblock content %}
+
+    ```
+4. Buka `models.py` dan tambahkan kode ini :
+   ```
+      import uuid  # tambahkan baris ini di paling atas
+      
+      class Product(models.Model):
+       id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # tambahkan baris ini
+       name = models.CharField(max_length=255)
+       price = models.IntegerField()
+       description = models.TextField()
+       quantity = models.IntegerField(default=0)
+       mood_intensity = models.IntegerField(default=0)
+   
+       @property
+       def is_mood_strong(self):
+           return self.mood_intensity > 5
+
+
+    ```
+5. Migrasi dengan command :
+    
+     ```
+      python manage.py makemigrations
+      python manage.py migrate
+     ```
+6. Buat berkas baru pada direktori `main` dengan nama `forms.py` dan isi lah dengan :
+   ```
+   from django.forms import ModelForm
+   from main.models import Product
+   
+   class ProductForm(ModelForm):
+       class Meta:
+           model = Product
+           fields = ['name', 'price', 'description', 'quantity', 'mood_intensity']
+   ```
+7. Buka pada direktori `main` dengan nama `views.py` dan tambahkan import :
+   ```
+   from django.shortcuts import render, redirect   # Tambahkan import redirect di baris ini
+   from main.forms import MoodEntryForm
+   from main.models import MoodEntry
+   ```
+8. Masih diberkas yang sama, buatlah fungsi baru dengan nama `add_product` dan isi dengan :
+   ```
+   def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main:product_list')
+    else:
+        form = ProductForm()
+    return render(request, 'add_product.html', {'form': form})
+   ```
+9. Lalu ubah fungsi `show_main` jadi :
+    ```
+    def show_main(request):
+    products = Product.objects.all()
+
+    context = {
+        'name': 'Candy Baby Parfum',
+        'price': 'Rp 150.000',
+        'description': 'Candy Baby adalah body mist yang manis dan menyegarkan, dengan aroma permen kapas yang menggoda dan vanilla yang lembut. Parfum ini memberikan sensasi seperti berada di dunia permen yang ceria, sempurna untuk mereka yang ingin menonjolkan sisi playful dan feminin. Dengan aroma ringan namun tahan lama, Candy Baby adalah pilihan ideal untuk digunakan sehari-hari.',
+        'quantity': '10',
+        'products': products  
+    }
+
+    return render(request, "main.html", context)
+    ```
+10. Buat berkas HTML baru dengan nama `add_product.html` pada direktori `main/templates`. Isi `add_product.html` dengan kode berikut :
+    ```
+      {% extends 'base.html' %}
+
+      {% block content %}
+      <h1>Tambah Produk Baru</h1>
+      
+      <form method="POST">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}  <!-- Menampilkan form penambahan produk sebagai tabel -->
+          <tr>
+            <td></td>
+            <td>
+              <input type="submit" value="Tambah Produk" />  <!-- Tombol submit form -->
+            </td>
+          </tr>
+        </table>
+      </form>
+      
+      {% endblock %}
+
+    ```
+11. Buka `views.py` dan tambahkan import :
+    ```
+      from django.http import HttpResponse
+      from django.core import serializers
+    ```
+13. Masih di file yang sama buat fungsi-fungsi baru sebagai berikut :
+    ```
+      def show_xml(request):
+          data = Product.objects.all()  
+          return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+      def show_json(request):
+          data = Product.objects.all()
+          return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      
+      def show_xml_by_id(request, id):
+          data = Product.objects.filter(pk=id)
+          return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+      
+      def show_json_by_id(request, id):
+          data = Product.objects.filter(pk=id)
+    ```
+14. Buka `urls.py` dan tambahkan import :
+    ```
+      from main.views import show_main, add_product, show_xml
+      from main.views import show_main, add_product, show_xml, show_json
+      from main.views import show_main, add_product, show_xml, show_json, show_xml_by_id, show_json_by_id
+    ```
+15. Masih di file yang sama, pada `urlpatterns` tambahkan :
+    ```
+      ...
+       path('xml/', show_xml, name='show_xml'),
+       path('json/', show_json, name='show_json'),
+       path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+       path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+      ...
+    ```
+16. Mengetest aplikasi pada localhost dengan command:
+
+     ```
+     python manage.py runserver
+       ```
+    kemudian buka [localhost](http://localhost:8000/) di browser.
+17. Lakukan `add, commit, push` .
+
+## Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+Kita memerlukan Data Delivery untuk mengimplementasikan sebuah platfrom untuk memusatkan dan mengelola data. Data delivery sangat penting dalam pengimplementasian platform karena memastikan bahwa informasi yang dibutuhkan untuk menjalankan fungsionalitas aplikasi dapat dipertukarkan antara klien dan server. Sehingga dengan adanya hal tersebut data dapat diproses dan dianalisis secara efisien untuk menghasilkan wawasan yang dapat ditindaklanjuti. Dalam platform modern, API (Application Programming Interface) digunakan untuk data delivery sehingga aplikasi dapat berkomunikasi secara efisien dengan layanan pihak ketiga atau aplikasi lain.
+## Mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Sebelumnya kita perlu tau pengertian dari XML dan JSON. XML, atau eXtensible Markup Language, adalah sebuah format yang dirancang agar mudah dimengerti hanya dengan membacanya, karena setiap elemen dalam XML mendeskripsikan dirinya sendiri. XML banyak digunakan dalam berbagai aplikasi web dan mobile untuk tujuan penyimpanan dan pertukaran data. Sedangkan JSON, atau JavaScript Object Notation, adalah sebuah format yang dirancang agar mudah dimengerti karena setiap elemennya mendeskripsikan dirinya sendiri atau self describing. JSON banyak digunakan dalam berbagai aplikasi web dan mobile untuk menyimpan dan mentransfer data. Menurut saya, dari kedua versi tersebut lebih baik JSON selain karena populer dan banyak dipakai JSON memiliki format yang lebih mudah dibaca manusia. Selain itu, format JSON yang cenderung memiliki karakter lebih sedikit dari format lain seperti XML memungkinkan JSON untuk diproses lebih cepat daripada format lain.
+## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+Fungsi dari is_valid adalah untuk mencegah input data yang tidak valid atau berpotensi merusak sistem. Validasi yang dilakukan di server mencegah manipulasi data dari sisi klien. Intinya agar program berjalan sesuai dengan apa yang kita inginkan.
+## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+CSRF token diperlukan saat membuat form di Django untuk melindungi keamanan pengguna dari serangan CSRF (Cross-Site Request Forgery). Jika kita tidak menambahkan csrf_token pada form django aplikasi kita menjadi rentan terhadap serangan CSRF. Ini bisa memungkinkan penyerang untuk mengirimkan permintaan palsu atas nama pengguna yang sah tanpa persetujuan mereka.
