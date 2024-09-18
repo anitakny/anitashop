@@ -1,6 +1,6 @@
 # Toko Anita
 
-### Proyek Django sederhana yang diperuntukkan untuk pemenuhan Tugas 2 mata kuliah Pemrograman Berbasis Platfrom oleh Anita Khoirun Nisa dengan NPM 2306152273.
+### Proyek Django sederhana yang diperuntukkan untuk pemenuhan Tugas mata kuliah Pemrograman Berbasis Platfrom oleh Anita Khoirun Nisa dengan NPM 2306152273.
 ### Link PWS dapat diakses di [sini](https://anita-khoirun-tokoanita.pbp.cs.ui.ac.id/)
 
 # Tugas 2
@@ -281,3 +281,119 @@ Django menyediakan struktur yang kuat dan banyak fitur built-in, seperti ORM dan
 ## Mengapa Django ORM?
 Django ORM atau singkatan dari Object-Relational Mapping. Object adalah apa yang kita gunakan dalam bahasa pemrograman, relasi adalah basis data pada proyek sedangkan pemetaan adalah tautan antara keduanya. Django ORM memetakan model-model Python ke tabel-tabel dalam database sehingga memungkinkan manipulasi data yang mudah dan efisien. Lalu, abstraksi yang disediakan oleh Django ORM membantu pengembang fokus pada logika aplikasi dan meningkatkan produktivitas secara keseluruhan.
 
+# Tugas 3
+## Proses Pembuatan Projek Django
+
+1. Buat direktori baru bernama `templates` di dalam `root folder`, lalu buat berkas baru bernama `base.html` dan isi dengan :
+   ```
+      {% load static %}
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          {% block meta %} {% endblock meta %}
+        </head>
+      
+        <body>
+          {% block content %} {% endblock content %}
+        </body>
+      </html>
+   ```
+2. Buka file bernama `settings.py` yang ada di dalam direktori proyek `toko_anita`, lalu sesuaikan :
+    ```
+      ...
+      TEMPLATES = [
+          {
+              'BACKEND': 'django.template.backends.django.DjangoTemplates',
+              'DIRS': [BASE_DIR / 'templates'], # Tambahkan konten baris ini
+              'APP_DIRS': True,
+              ...
+          }
+      ]
+      ...
+    ```
+3. Ubah kode pada berkas `main.html` menjadi :
+   ```
+      {% extends 'base.html' %}
+       {% block content %}
+       <h1>Toko Anita</h1>
+      
+       <h5>Nama Produk:</h5>
+        <p>{{ name }}</p>
+      
+        <h5>Deskripsi:</h5>
+        <p>{{ description }}</p>
+      
+        <h5>Jumlah:</h5>
+        <p>{{ quantity }}</p>
+       {% endblock content %}
+
+    ```
+4. Buka `models.py` dan tambahkan kode ini :
+   ```
+      import uuid  # tambahkan baris ini di paling atas
+      
+      class Product(models.Model):
+       id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # tambahkan baris ini
+       name = models.CharField(max_length=255)
+       price = models.IntegerField()
+       description = models.TextField()
+       quantity = models.IntegerField(default=0)
+       mood_intensity = models.IntegerField(default=0)
+   
+       @property
+       def is_mood_strong(self):
+           return self.mood_intensity > 5
+
+
+    ```
+5. Migrasi dengan command :
+    
+     ```
+      python manage.py makemigrations
+      python manage.py migrate
+     ```
+6. Buat berkas baru pada direktori `main` dengan nama `forms.py` dan isi lah dengan :
+   ```
+   from django.forms import ModelForm
+   from main.models import Product
+   
+   class ProductForm(ModelForm):
+       class Meta:
+           model = Product
+           fields = ['name', 'price', 'description', 'quantity', 'mood_intensity']
+   ```
+7. Buka pada direktori `main` dengan nama `views.py` dan tambahkan import :
+   ```
+   from django.shortcuts import render, redirect   # Tambahkan import redirect di baris ini
+   from main.forms import MoodEntryForm
+   from main.models import MoodEntry
+   ```
+8. Masih diberkas yang sama, buatlah fungsi baru dengan nama `add_product` dan isi dengan :
+   ```
+   def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main:product_list')
+    else:
+        form = ProductForm()
+    return render(request, 'add_product.html', {'form': form})
+   ```
+9. Lalu ubah fungsi `show_main` jadi :
+    ```
+    def show_main(request):
+    products = Product.objects.all()
+
+    context = {
+        'name': 'Candy Baby Parfum',
+        'price': 'Rp 150.000',
+        'description': 'Candy Baby adalah body mist yang manis dan menyegarkan, dengan aroma permen kapas yang menggoda dan vanilla yang lembut. Parfum ini memberikan sensasi seperti berada di dunia permen yang ceria, sempurna untuk mereka yang ingin menonjolkan sisi playful dan feminin. Dengan aroma ringan namun tahan lama, Candy Baby adalah pilihan ideal untuk digunakan sehari-hari.',
+        'quantity': '10',
+        'products': products  
+    }
+
+    return render(request, "main.html", context)
+    ```
