@@ -26,13 +26,10 @@ def add_product(request):
     if form.is_valid() and request.method == 'POST':
         form.save()
         return redirect('main:show_main')
-    # else:
-    #     form = ProductForms()  # Form diubah ke ProductForm
-    return render(request, 'add_product.html', {'form': form})
-
-# def product_list(request):
-#     products = ProductForm.objects.all()  
-#     return render(request, 'product_list.html', {'products': products})
+    context = {
+        'form': form,
+    }
+    return render(request, 'add_product.html', context)
 
 def show_xml(request):
     data = ProductForm.objects.all()  
