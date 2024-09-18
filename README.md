@@ -397,3 +397,70 @@ Django ORM atau singkatan dari Object-Relational Mapping. Object adalah apa yang
 
     return render(request, "main.html", context)
     ```
+10. Buat berkas HTML baru dengan nama `add_product.html` pada direktori `main/templates`. Isi `add_product.html` dengan kode berikut :
+    ```
+      {% extends 'base.html' %}
+
+      {% block content %}
+      <h1>Tambah Produk Baru</h1>
+      
+      <form method="POST">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}  <!-- Menampilkan form penambahan produk sebagai tabel -->
+          <tr>
+            <td></td>
+            <td>
+              <input type="submit" value="Tambah Produk" />  <!-- Tombol submit form -->
+            </td>
+          </tr>
+        </table>
+      </form>
+      
+      {% endblock %}
+
+    ```
+11. Buka `views.py` dan tambahkan import :
+    ```
+      from django.http import HttpResponse
+      from django.core import serializers
+    ```
+13. Masih di file yang sama buat fungsi-fungsi baru sebagai berikut :
+    ```
+      def show_xml(request):
+          data = Product.objects.all()  
+          return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+      def show_json(request):
+          data = Product.objects.all()
+          return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      
+      def show_xml_by_id(request, id):
+          data = Product.objects.filter(pk=id)
+          return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+      
+      def show_json_by_id(request, id):
+          data = Product.objects.filter(pk=id)
+    ```
+14. Buka `urls.py` dan tambahkan import :
+    ```
+      from main.views import show_main, add_product, show_xml
+      from main.views import show_main, add_product, show_xml, show_json
+      from main.views import show_main, add_product, show_xml, show_json, show_xml_by_id, show_json_by_id
+    ```
+15. Masih di file yang sama, pada `urlpatterns` tambahkan :
+    ```
+      ...
+       path('xml/', show_xml, name='show_xml'),
+       path('json/', show_json, name='show_json'),
+       path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+       path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+      ...
+    ```
+16. Mengetest aplikasi pada localhost dengan command:
+
+     ```
+     python manage.py runserver
+       ```
+    kemudian buka [localhost](http://localhost:8000/) di browser.
+17. Lakukan `add, commit, push` .
