@@ -486,6 +486,89 @@ CSRF token diperlukan saat membuat form di Django untuk melindungi keamanan peng
 ### show_xml_by_id
 ![image](https://github.com/user-attachments/assets/ba15a0dd-00d8-4352-a334-767a68eadf58)
 
+# Tugas 4
+## Proses Pembuatan Projek Djang0
+1. Membuka file `views.py` tambahkan :
+    ```
+    from django.contrib.auth.forms import UserCreationForm
+    from django.contrib import messages
+    ```
+    dan buat fungsi register
+   ```
+   def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+   ```
+   Selanjutnya, buat file html nya, seperti :
+    ```
+   {% extends 'base.html' %}
+
+   {% block meta %}
+   <title>Register</title>
+   {% endblock meta %}
+   
+   {% block content %}
+   
+   <div class="login">
+     <h1>Register</h1>
+   
+     <form method="POST">
+       {% csrf_token %}
+       <table>
+         {{ form.as_table }}
+         <tr>
+           <td></td>
+           <td><input type="submit" name="submit" value="Daftar" /></td>
+         </tr>
+       </table>
+     </form>
+   
+     {% if messages %}
+     <ul>
+       {% for message in messages %}
+       <li>{{ message }}</li>
+       {% endfor %}
+     </ul>
+     {% endif %}
+   </div>
+   
+   {% endblock content %}
+    ```
+3. Lakukan hal tersebut dan buat login dan logout (walaupun logout tidak mempunyai tampilan hanya mengarahkan ke laman login lagi)
+4. Hubungkan antara Product dan User
+5. Migrasi dengan command :
+    
+     ```
+      python manage.py makemigrations
+      python manage.py migrate
+     ```
+6. Mengetest aplikasi pada localhost dengan command:
+     ```
+     python manage.py runserver
+     ```
+    kemudian buka [localhost](http://localhost:8000/) di browser.
+7. Lakukan `add, commit, push` .
+## Apa perbedaan antara HttpResponseRedirect() dan redirect()
+Perbedaan antara HttpResponseRedirect() dan redirect() yaitu:
+1. Argumen
+HttpResponseRedirect() hanya dapat mengambil argumen berupa URL, sedangkan redirect() dapat menerima argumen berupa model, view, atau URL.
+2. Fleksibelitas
+HttpResponseRedirect() digunakan untuk mengarahkan pengguna ke URL tertentu. Sedangkan Redirect() lebih fleksibel dalam hal apa yang dapat dialihkan karena dapat menerima argumen yang lebih beragam.
+## Jelaskan cara kerja penghubungan model Product dengan User
+Penghubungan antara product dan user di Django menggunakan ForeignKey memungkinkan setiap produk terkait dengan pengguna tertentu. Penghubungan ini digunakan agar setiap produk dapat diketahui siapa pemilik atau pengguna yang membuatnya. Setiap Product hanya bisa dimiliki oleh satu User, tetapi satu User bisa memiliki banyak Product. 
+## Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut
+Authentication adalah proses memverifikasi identitas pengguna. Django mengelola otentikasi dengan mengelola sesi dan menggunakan model pengguna bawaan. Sedangkan authorization adalah proses menentukan apakah pengguna yang sudah terotentikasi memiliki izin untuk melakukan tindakan tertentu. Django menggunakan permissions, groups, dan decorators untuk mengelola otorisasi.
+## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django menggunakan session framework untuk menyimpan data pengguna di server dan menghubungkannya dengan browser pengguna melalui session ID yang disimpan di cookies. Setiap kali pengguna melakukan permintaan baru, session ID ini dikirim ke server dan Django menggunakan session yang sesuai untuk mengenali pengguna. Cookies tidak hanya berguna sebagai itu, kegunaan lain dari cookies meliputi manajemen sesi, personalisasi, analitik, dan pelacakan perilaku pengguna. Cookies juga dapat digunakan untuk menyediakan fitur "Remember Me" atau untuk menyimpan preferensi pengguna. Keamanan cookies harus dijaga dengan menerapkan fitur seperti Secure, HttpOnly, dan SameSite cookies, serta dengan tidak menyimpan informasi sensitif di dalam cookies. Karena tdak semua cookies aman, dan perlindungan tambahan diperlukan untuk mencegah serangan seperti session hijacking atau cross-site scripting (XSS).
+
 
 
 
