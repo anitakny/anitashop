@@ -90,17 +90,13 @@
     <tr>
       <th>Nama Produk</th>
       <th>Harga</th>
-      <!-- <th>Deskripsi</th> -->
       <th>Jumlah</th>
-      <!-- <th>Intensitas Mood</th> -->
     </tr>
     {% for product in ordered %}
     <tr>
       <td>{{ product.name }}</td>
       <td>{{ product.price }}</td>
-      <!-- <td>{{ product.description }}</td> -->
       <td>{{ product.quantity }}</td>
-      <!-- <td>{{ product.mood_intensity }}</td> -->
     </tr>
     {% endfor %}
   </table>
@@ -110,10 +106,12 @@
   
   <br />
   
-  <a href="{% url 'add_product' %}">
-    <button>Add New Product</button>
-</a>
-</div>
-
-
-{% endblock content %}
+  <a href="{% url 'main:add_product' %}">
+    <button>Add New Mood Entry</button>
+  </a>
+  <a href="{% url 'main:logout' %}">
+    <button>Logout</button>
+  </a>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+  {% endblock content %}
+  
