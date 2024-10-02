@@ -569,7 +569,67 @@ Authentication adalah proses memverifikasi identitas pengguna. Django mengelola 
 ## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
 Django menggunakan session framework untuk menyimpan data pengguna di server dan menghubungkannya dengan browser pengguna melalui session ID yang disimpan di cookies. Setiap kali pengguna melakukan permintaan baru, session ID ini dikirim ke server dan Django menggunakan session yang sesuai untuk mengenali pengguna. Cookies tidak hanya berguna sebagai itu, kegunaan lain dari cookies meliputi manajemen sesi, personalisasi, analitik, dan pelacakan perilaku pengguna. Cookies juga dapat digunakan untuk menyediakan fitur "Remember Me" atau untuk menyimpan preferensi pengguna. Keamanan cookies harus dijaga dengan menerapkan fitur seperti Secure, HttpOnly, dan SameSite cookies, serta dengan tidak menyimpan informasi sensitif di dalam cookies. Karena tdak semua cookies aman, dan perlindungan tambahan diperlukan untuk mencegah serangan seperti session hijacking atau cross-site scripting (XSS).
 
+# Tugas 5
+## Proses Pembuatan Projek Django
+1. Membuat folder `static` pada root project
+2. Menambahkan `global.css` sebagai basis semua laman pada projek
+3. Membuat file sseperti `edit_product`, `register.html`, `navbar.html` dan menyesuaikan nya dengan models, menmabahkan url, path nya dll
+4. Menambahkan line berikut di base.html untuk menghubungkan css dengan html:
+      ```
+     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+     ```
+6. Migrasi dengan command :
+     ```
+      python manage.py makemigrations
+      python manage.py migrate
+     ```
+ 7. Mengetest aplikasi pada localhost dengan command:
+     ```
+     python manage.py runserver
+     ```
+    kemudian buka [localhost](http://localhost:8000/) di browser.
+8. Lakukan `add, commit, push` .
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Dalam CSS, urutan prioritas (specificity) pengambilan selector untuk elemen HTML mengikuti aturan tertentu yang menentukan mana yang akan diterapkan ketika ada beberapa aturan yang berlaku untuk elemen yang sama. Berikut adalah aturan dasar dalam penentuan prioritas 
+1. Urutan Spesifitas
+Inline styles > ID selector > Class selector > Element selector
+2. Urutan Cascade 
+Jika dua atau lebih selector memiliki tingkat spesifisitas yang sama, maka urutan di mana mereka muncul dalam stylesheet akan menentukan mana yang diterapkan. Aturan yang muncul terakhir akan diterapkan
+3. !important
+Aturan dengan !important mengalahkan semua aturan lainnya, kecuali ada aturan !important lain yang lebih spesifik
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Responsive design penting karena : 
+a. Penggunaan Multi-Device yang Luas
+b. Peningkatan Pengalaman Pengguna (User Experience)
+c. SEO dan Rekomendasi Google:
+d. Efisien
+e. Tren penggunaan internet menunjukkan peningkatan pengguna yang lebih sering mengakses web dari perangkat mobile dibandingkan desktop
+Aplikasi yang sudah menerapkannya adalah Twitter atau X, dan yang belum biasanya sistem manajemen bisnis atau ERP (Enterprise Resource Planning) kuno atau situs web pemerintah atau instansi yang lebih tua
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+a. Margin
+Margin memiliki kegunaan untuk memberikan jarak antara elemen satu dengan elemen lain
+      ```
+      div {
+        margin: 20px;
+      }
+      ```
+b. Border
+Garis yang mengelilingi elemen. Border memisahkan padding dari margin
+    ```
+      div {
+        border: 1px solid black;
+      }
+      ```
+c. Padding
+Ruang di dalam elemen, antara konten elemen dan border
+      ```
+      div {
+        border: 1px solid black;
+      }
 
-
-
-
+      ```
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+a. Flex box
+Flexbox adalah layout model satu dimensi yang memudahkan pengaturan tata letak elemen secara fleksibel di sepanjang satu arah (baris atau kolom). Flex box berguna untuk mengatur elemen secara dinamis dalam baris atau kolom, seperti menyusun item dalam menu horizontal atau vertikal yang responsif.
+b. Grid layout
+Grid layout adalah model tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom.Grid layout berguna untuk layout kompleks dengan banyak elemen yang perlu ditempatkan di berbagai posisi di sepanjang baris dan kolom.
