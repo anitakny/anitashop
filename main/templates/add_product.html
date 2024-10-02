@@ -1,19 +1,86 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Tambah Produk</title>
+{% endblock meta %}
 
 {% block content %}
-<h1>Tambah Produk Baru</h1>
+{% include 'navbar.html' %}
 
-<form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}  <!-- Menampilkan form penambahan produk sebagai tabel -->
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Tambah Produk" />  <!-- Tombol submit form -->
-      </td>
-    </tr>
-  </table>
-</form>
+<div class="flex flex-col min-h-screen bg-gray-100">
+  <div class="container mx-auto px-4 py-8 mt-16 max-w-lg">
+    <h1 class="text-3xl font-bold text-center mb-8 text-black">Tambah Produk</h1>
+  
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="flex flex-col">
+            <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gray-700">
+              {{ field.label }}
+            </label>
+            <div class="w-full">
+              {{ field }}
+            </div>
+            {% if field.help_text %}
+              <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <div class="flex justify-center mt-6">
+          <button type="submit" class="bg-green-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out w-full">
+            Tambah Produk
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
+
+<style>
+  /* Custom styles to enhance the form appearance */
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #2e8b57;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #256b47;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .container {
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 2xl;
+    }
+  }
+</style>

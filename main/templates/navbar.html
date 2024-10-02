@@ -1,0 +1,52 @@
+<nav class="bg-gray-800 shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold text-white">Toko Anita</h1>
+        </div>
+        <div class="hidden md:flex items-center space-x-4">
+          <a href="{% url 'main:show_main' %}" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md transition duration-300">Home</a>
+          <a href="{% url 'main:add_product' %}" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md transition duration-300">Products</a>
+          <span class="text-white">Welcome, {{ username }}</span>
+          <a href="{% url 'main:logout' %}" class="text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded-md transition duration-300">Logout</a>
+        </div>
+        <div class="md:hidden">
+          <button class="mobile-menu-toggle focus:outline-none">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden md:hidden px-4 pb-4">
+      <a href="{% url 'main:show_main' %}" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition duration-300">Home</a>
+      <a href="{% url 'main:add_product' %}" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition duration-300">Products</a>
+      <span class="block text-white px-3 py-2">Welcome, {{ username }}</span>
+      <a href="{% url 'main:logout' %}" class="block text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded-md transition duration-300">Logout</a>
+    </div>
+  </nav>
+  
+  <script>
+    const menuButton = document.querySelector(".mobile-menu-toggle");
+    const mobileMenu = document.querySelector(".mobile-menu");
+  
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+  
+  <style>
+    .mobile-menu-toggle {
+      cursor: pointer;
+    }
+  
+    @media (min-width: 768px) {
+      .mobile-menu {
+        display: none;
+      }
+    }
+  </style>
+  

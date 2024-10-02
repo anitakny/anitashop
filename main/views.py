@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import ProductForms
 from main.models import ProductForm
 from django.http import HttpResponse
@@ -14,6 +14,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 
+
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
@@ -21,13 +22,6 @@ def show_main(request):
 
     context = {
         'name': request.user.username,
-        'price': 'Rp 150.000',
-        'description': ('Candy Baby adalah body mist yang manis dan menyegarkan, dengan aroma permen kapas '
-                        'yang menggoda dan vanilla yang lembut. Parfum ini memberikan sensasi seperti berada '
-                        'di dunia permen yang ceria, sempurna untuk mereka yang ingin menonjolkan sisi playful '
-                        'dan feminin. Dengan aroma ringan namun tahan lama, Candy Baby adalah pilihan ideal '
-                        'untuk digunakan sehari-hari.'),
-        'quantity': '10',
         'ordered': ordered,
         'last_login': request.COOKIES.get('last_login', 'N/A'),
     }
@@ -98,3 +92,17 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_product(request, id):
+    product = ProductForm.objects.get(pk=id)
+    form = ProductForms(request.POST or None, instance=product)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    context = {'form':form}
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    product = ProductForm.objects.get(pk = id)
+    product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))

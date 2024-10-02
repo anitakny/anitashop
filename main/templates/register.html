@@ -5,28 +5,142 @@
 {% endblock meta %}
 
 {% block content %}
+<div class="register-container">
+  <h1>Daftar Akun</h1>
 
-<div class="login">
-  <h1>Register</h1>
-
-  <form method="POST">
+  <form method="POST" class="register-form">
     {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input type="submit" name="submit" value="Daftar" /></td>
-      </tr>
-    </table>
+    <div class="form-fields">
+      {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <div class="error-message">
+          {% for error in field.errors %}
+          <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    
+    <button type="submit" class="btn-submit">Daftar</button>
   </form>
 
   {% if messages %}
-  <ul>
+  <ul class="messages">
     {% for message in messages %}
     <li>{{ message }}</li>
     {% endfor %}
   </ul>
   {% endif %}
-</div>
 
+  <p>Sudah punya akun? <a href="{% url 'main:login' %}">Login di sini</a></p>
+</div>
 {% endblock content %}
+
+<style>
+  /* Container utama */
+  .register-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  h1 {
+    color: #2e8b57;
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-fields {
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus {
+    border-color: #2e8b57;
+    outline: none;
+  }
+
+  .btn-submit {
+    padding: 10px 20px;
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-submit:hover {
+    background-color: #256b47;
+  }
+
+  /* Pesan error atau sukses */
+  .messages {
+    margin-top: 20px;
+    padding: 10px;
+    list-style: none;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+  }
+
+  .messages li {
+    margin-bottom: 10px;
+  }
+
+  /* Pesan error */
+  .error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  /* Link untuk login */
+  p {
+    margin-top: 20px;
+    color: #555;
+  }
+
+  p a {
+    color: #2e8b57;
+    text-decoration: none;
+  }
+
+  p a:hover {
+    text-decoration: underline;
+  }
+</style>
