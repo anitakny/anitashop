@@ -487,7 +487,7 @@ CSRF token diperlukan saat membuat form di Django untuk melindungi keamanan peng
 ![image](https://github.com/user-attachments/assets/ba15a0dd-00d8-4352-a334-767a68eadf58)
 
 # Tugas 4
-## Proses Pembuatan Projek Djang0
+## Proses Pembuatan Projek Django
 1. Membuka file `views.py` tambahkan :
     ```
     from django.contrib.auth.forms import UserCreationForm
@@ -635,7 +635,16 @@ b. Grid layout
 Grid layout adalah model tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom.Grid layout berguna untuk layout kompleks dengan banyak elemen yang perlu ditempatkan di berbagai posisi di sepanjang baris dan kolom.
 
 
-#Tugas 6
+# Tugas 6
+## Proses Pembuatan Projek Django
+1. Mengubah kode cards data agar dapat mendukung AJAX GET.
+2. Melakukan pengambilan data menggunakan AJAX GET. Pastikan bahwa data yang diambil hanyalah data milik pengguna yang logged-in.
+3. Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan product.
+4. Buatlah fungsi view baru untuk menambahkan mood baru ke dalam basis data.
+5. Buatlah path `/create-ajax/` yang mengarah ke fungsi view yang baru dibuat
+6. Hubungkan form yang telah kamu buat di dalam modal kamu ke path `/create-ajax/`.
+
+
 ## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
 JavaScript adalah bahasa pemrograman populer yang digunakan untuk membuat situs dengan konten website yang dinamis. Manfaatnya sebagai berikut:
 1. Membuat Tampilan lebih menarik
@@ -646,10 +655,13 @@ Fungsi JavaScript selanjutnya ialah untuk membuat aplikasi mobile. Kalau dulu ap
 JavaScript juga dapat berfungsi untuk mengembangkan game online berbasis browser. Untuk membuat game browser yang menarik, bahasa pemrograman JavaScript bisa dikombinasikan dengan HTML5.
 4. Menjalankan Web Server
 Terakhir, seiring perkembangannya, bahasa pemrograman JavaScript tak hanya mampu bekerja di sisi browser saja, tetapi juga di sisi server dengan menggunakan Node.js. Node.js ini akan mengeksekusi kode JavaScript pada sisi server sehingga dapat menjalankan situs, aplikasi web, dan game berbasis browser. Node.js juga lebih mampu menangani banyak proses secara bersamaan, tanpa perlu menunggu satu proses selesai terlebih dulu. Sehingga proses bisa dilakukan lebih cepat. 
+
 ## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
 Penggunaan await pada fetch() berfungsi untuk menunggu hingga promise terpenuhi atau ditolak, sebelum melanjutkan eksekusi fungsi async. Await juga dapat digunakan untuk mendapatkan nilai dari suatu fungsi yang biasanya menggunakan .then(). Apa yang terjadi jika tidak menggunakan await? Fungsi pemanggil tidak akan muncul dalam jejak tumpukan kesalahan.
+
 ## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
-Decorator csrf_exempt digunakan pada view yang akan digunakan untuk AJAX POST agar Django tidak perlu mengecek keberadaan csrf_token pada POST request yang dikirimkan ke fungsi tersebut
+Decorator csrf_exempt digunakan pada view yang akan digunakan untuk AJAX POST agar Django tidak perlu mengecek keberadaan csrf_token pada POST request yang dikirimkan ke fungsi tersebut.
+
 ## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
 Pembersihan data input pengguna di backend sangat penting meskipun telah dilakukan di frontend. Beberapa alasan hal tersebut dilakukan :
 1. Data yang dikirim dari frontend dapat dimanipulasi oleh pengguna. Pembersihan di backend memastikan bahwa aplikasi tetap aman dari serangan seperti injeksi SQL, XSS, atau serangan lainnya yang dapat terjadi jika data yang tidak tervalidasi diterima.
