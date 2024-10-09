@@ -487,7 +487,7 @@ CSRF token diperlukan saat membuat form di Django untuk melindungi keamanan peng
 ![image](https://github.com/user-attachments/assets/ba15a0dd-00d8-4352-a334-767a68eadf58)
 
 # Tugas 4
-## Proses Pembuatan Projek Djang0
+## Proses Pembuatan Projek Django
 1. Membuka file `views.py` tambahkan :
     ```
     from django.contrib.auth.forms import UserCreationForm
@@ -569,7 +569,102 @@ Authentication adalah proses memverifikasi identitas pengguna. Django mengelola 
 ## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
 Django menggunakan session framework untuk menyimpan data pengguna di server dan menghubungkannya dengan browser pengguna melalui session ID yang disimpan di cookies. Setiap kali pengguna melakukan permintaan baru, session ID ini dikirim ke server dan Django menggunakan session yang sesuai untuk mengenali pengguna. Cookies tidak hanya berguna sebagai itu, kegunaan lain dari cookies meliputi manajemen sesi, personalisasi, analitik, dan pelacakan perilaku pengguna. Cookies juga dapat digunakan untuk menyediakan fitur "Remember Me" atau untuk menyimpan preferensi pengguna. Keamanan cookies harus dijaga dengan menerapkan fitur seperti Secure, HttpOnly, dan SameSite cookies, serta dengan tidak menyimpan informasi sensitif di dalam cookies. Karena tdak semua cookies aman, dan perlindungan tambahan diperlukan untuk mencegah serangan seperti session hijacking atau cross-site scripting (XSS).
 
+# Tugas 5
+## Proses Pembuatan Projek Django
+1. Membuat folder `static` pada root project
+2. Menambahkan `global.css` sebagai basis semua laman pada projek
+3. Membuat file sseperti `edit_product`, `register.html`, `navbar.html` dan menyesuaikan nya dengan models, menmabahkan url, path nya dll
+4. Menambahkan line berikut di base.html untuk menghubungkan css dengan html:
+      ```
+     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+     ```
+6. Migrasi dengan command :
+     ```
+      python manage.py makemigrations
+      python manage.py migrate
+     ```
+ 7. Mengetest aplikasi pada localhost dengan command:
+     ```
+     python manage.py runserver
+     ```
+    kemudian buka [localhost](http://localhost:8000/) di browser.
+8. Lakukan `add, commit, push` .
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Dalam CSS, urutan prioritas (specificity) pengambilan selector untuk elemen HTML mengikuti aturan tertentu yang menentukan mana yang akan diterapkan ketika ada beberapa aturan yang berlaku untuk elemen yang sama. Berikut adalah aturan dasar dalam penentuan prioritas 
+1. Urutan Spesifitas
+Inline styles > ID selector > Class selector > Element selector
+2. Urutan Cascade 
+Jika dua atau lebih selector memiliki tingkat spesifisitas yang sama, maka urutan di mana mereka muncul dalam stylesheet akan menentukan mana yang diterapkan. Aturan yang muncul terakhir akan diterapkan
+3. !important
+Aturan dengan !important mengalahkan semua aturan lainnya, kecuali ada aturan !important lain yang lebih spesifik
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Responsive design penting karena : 
+a. Penggunaan Multi-Device yang Luas
+b. Peningkatan Pengalaman Pengguna (User Experience)
+c. SEO dan Rekomendasi Google:
+d. Efisien
+e. Tren penggunaan internet menunjukkan peningkatan pengguna yang lebih sering mengakses web dari perangkat mobile dibandingkan desktop
+Aplikasi yang sudah menerapkannya adalah Twitter atau X, dan yang belum biasanya sistem manajemen bisnis atau ERP (Enterprise Resource Planning) kuno atau situs web pemerintah atau instansi yang lebih tua
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+a. Margin
+Margin memiliki kegunaan untuk memberikan jarak antara elemen satu dengan elemen lain
+      ```
+      div {
+        margin: 20px;
+      }
+      ```
+b. Border
+Garis yang mengelilingi elemen. Border memisahkan padding dari margin
+    ```
+      div {
+        border: 1px solid black;
+      }
+      ```
+c. Padding
+Ruang di dalam elemen, antara konten elemen dan border
+      ```
+      div {
+        border: 1px solid black;
+      }
+
+      ```
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+a. Flex box
+Flexbox adalah layout model satu dimensi yang memudahkan pengaturan tata letak elemen secara fleksibel di sepanjang satu arah (baris atau kolom). Flex box berguna untuk mengatur elemen secara dinamis dalam baris atau kolom, seperti menyusun item dalam menu horizontal atau vertikal yang responsif.
+b. Grid layout
+Grid layout adalah model tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom.Grid layout berguna untuk layout kompleks dengan banyak elemen yang perlu ditempatkan di berbagai posisi di sepanjang baris dan kolom.
 
 
+# Tugas 6
+## Proses Pembuatan Projek Django
+1. Mengubah kode cards data agar dapat mendukung AJAX GET.
+2. Melakukan pengambilan data menggunakan AJAX GET. Pastikan bahwa data yang diambil hanyalah data milik pengguna yang logged-in.
+3. Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan product.
+4. Buatlah fungsi view baru untuk menambahkan mood baru ke dalam basis data.
+5. Buatlah path `/create-ajax/` yang mengarah ke fungsi view yang baru dibuat
+6. Hubungkan form yang telah kamu buat di dalam modal kamu ke path `/create-ajax/`.
 
 
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+JavaScript adalah bahasa pemrograman populer yang digunakan untuk membuat situs dengan konten website yang dinamis. Manfaatnya sebagai berikut:
+1. Membuat Tampilan lebih menarik
+Dalam proses website development, JavaScript mampu menyulap website menjadi tampak lebih menarik dan interaktif, dengan konten-konten dinamisnya. Misalnya, konten yang bergerak dan memperbarui secara real-time tanpa perlu reload semua halaman website berkali-kali.  Sebagai contoh, Google Maps dengan user experience yang sangat baik. 
+2. Menciptakan Aplikasi Mobile
+Fungsi JavaScript selanjutnya ialah untuk membuat aplikasi mobile. Kalau dulu aplikasi mobile hanya bisa dikembangkan dengan bahasa pemrograman Java untuk Android. Sekarang, bahasa pemrograman ini sudah bisa digunakan dalam mobile API untuk membuat aplikasi mobile. Pun pembuatan aplikasi mobile juga semakin mudah dengan adanya framework JavaScript khusus aplikasi mobile, seperti React Native. Dengan framework ini, Anda bisa membuat aplikasi mobile untuk dua sistem operasi sekaligus, yaitu Android dan iOS. 
+3. Mengembangkan Game Berbasis Web Browser
+JavaScript juga dapat berfungsi untuk mengembangkan game online berbasis browser. Untuk membuat game browser yang menarik, bahasa pemrograman JavaScript bisa dikombinasikan dengan HTML5.
+4. Menjalankan Web Server
+Terakhir, seiring perkembangannya, bahasa pemrograman JavaScript tak hanya mampu bekerja di sisi browser saja, tetapi juga di sisi server dengan menggunakan Node.js. Node.js ini akan mengeksekusi kode JavaScript pada sisi server sehingga dapat menjalankan situs, aplikasi web, dan game berbasis browser. Node.js juga lebih mampu menangani banyak proses secara bersamaan, tanpa perlu menunggu satu proses selesai terlebih dulu. Sehingga proses bisa dilakukan lebih cepat. 
+
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Penggunaan await pada fetch() berfungsi untuk menunggu hingga promise terpenuhi atau ditolak, sebelum melanjutkan eksekusi fungsi async. Await juga dapat digunakan untuk mendapatkan nilai dari suatu fungsi yang biasanya menggunakan .then(). Apa yang terjadi jika tidak menggunakan await? Fungsi pemanggil tidak akan muncul dalam jejak tumpukan kesalahan.
+
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator csrf_exempt digunakan pada view yang akan digunakan untuk AJAX POST agar Django tidak perlu mengecek keberadaan csrf_token pada POST request yang dikirimkan ke fungsi tersebut.
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input pengguna di backend sangat penting meskipun telah dilakukan di frontend. Beberapa alasan hal tersebut dilakukan :
+1. Data yang dikirim dari frontend dapat dimanipulasi oleh pengguna. Pembersihan di backend memastikan bahwa aplikasi tetap aman dari serangan seperti injeksi SQL, XSS, atau serangan lainnya yang dapat terjadi jika data yang tidak tervalidasi diterima.
+2. Backend sering kali berfungsi sebagai satu titik untuk memproses data sebelum disimpan atau digunakan. Dengan membersihkan data di backend, Anda menjamin bahwa semua data yang masuk ke dalam sistem sudah tervalidasi dan konsisten.
+3. Tidak semua klien atau pengguna akan menggunakan frontend yang sama. Misalnya, jika ada API yang digunakan oleh aplikasi lain, data yang dikirim ke API tersebut harus tetap bersih dan tervalidasi.
+4. Bergantung sepenuhnya pada pembersihan di frontend dapat menghasilkan data yang tidak valid di backend jika pengguna mematikan JavaScript atau menggunakan alat yang dapat menghindari pemeriksaan di frontend.
