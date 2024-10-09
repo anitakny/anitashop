@@ -633,3 +633,26 @@ a. Flex box
 Flexbox adalah layout model satu dimensi yang memudahkan pengaturan tata letak elemen secara fleksibel di sepanjang satu arah (baris atau kolom). Flex box berguna untuk mengatur elemen secara dinamis dalam baris atau kolom, seperti menyusun item dalam menu horizontal atau vertikal yang responsif.
 b. Grid layout
 Grid layout adalah model tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom.Grid layout berguna untuk layout kompleks dengan banyak elemen yang perlu ditempatkan di berbagai posisi di sepanjang baris dan kolom.
+
+
+#Tugas 6
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+JavaScript adalah bahasa pemrograman populer yang digunakan untuk membuat situs dengan konten website yang dinamis. Manfaatnya sebagai berikut:
+1. Membuat Tampilan lebih menarik
+Dalam proses website development, JavaScript mampu menyulap website menjadi tampak lebih menarik dan interaktif, dengan konten-konten dinamisnya. Misalnya, konten yang bergerak dan memperbarui secara real-time tanpa perlu reload semua halaman website berkali-kali.  Sebagai contoh, Google Maps dengan user experience yang sangat baik. 
+2. Menciptakan Aplikasi Mobile
+Fungsi JavaScript selanjutnya ialah untuk membuat aplikasi mobile. Kalau dulu aplikasi mobile hanya bisa dikembangkan dengan bahasa pemrograman Java untuk Android. Sekarang, bahasa pemrograman ini sudah bisa digunakan dalam mobile API untuk membuat aplikasi mobile. Pun pembuatan aplikasi mobile juga semakin mudah dengan adanya framework JavaScript khusus aplikasi mobile, seperti React Native. Dengan framework ini, Anda bisa membuat aplikasi mobile untuk dua sistem operasi sekaligus, yaitu Android dan iOS. 
+3. Mengembangkan Game Berbasis Web Browser
+JavaScript juga dapat berfungsi untuk mengembangkan game online berbasis browser. Untuk membuat game browser yang menarik, bahasa pemrograman JavaScript bisa dikombinasikan dengan HTML5.
+4. Menjalankan Web Server
+Terakhir, seiring perkembangannya, bahasa pemrograman JavaScript tak hanya mampu bekerja di sisi browser saja, tetapi juga di sisi server dengan menggunakan Node.js. Node.js ini akan mengeksekusi kode JavaScript pada sisi server sehingga dapat menjalankan situs, aplikasi web, dan game berbasis browser. Node.js juga lebih mampu menangani banyak proses secara bersamaan, tanpa perlu menunggu satu proses selesai terlebih dulu. Sehingga proses bisa dilakukan lebih cepat. 
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Penggunaan await pada fetch() berfungsi untuk menunggu hingga promise terpenuhi atau ditolak, sebelum melanjutkan eksekusi fungsi async. Await juga dapat digunakan untuk mendapatkan nilai dari suatu fungsi yang biasanya menggunakan .then(). Apa yang terjadi jika tidak menggunakan await? Fungsi pemanggil tidak akan muncul dalam jejak tumpukan kesalahan.
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator csrf_exempt digunakan pada view yang akan digunakan untuk AJAX POST agar Django tidak perlu mengecek keberadaan csrf_token pada POST request yang dikirimkan ke fungsi tersebut
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input pengguna di backend sangat penting meskipun telah dilakukan di frontend. Beberapa alasan hal tersebut dilakukan :
+1. Data yang dikirim dari frontend dapat dimanipulasi oleh pengguna. Pembersihan di backend memastikan bahwa aplikasi tetap aman dari serangan seperti injeksi SQL, XSS, atau serangan lainnya yang dapat terjadi jika data yang tidak tervalidasi diterima.
+2. Backend sering kali berfungsi sebagai satu titik untuk memproses data sebelum disimpan atau digunakan. Dengan membersihkan data di backend, Anda menjamin bahwa semua data yang masuk ke dalam sistem sudah tervalidasi dan konsisten.
+3. Tidak semua klien atau pengguna akan menggunakan frontend yang sama. Misalnya, jika ada API yang digunakan oleh aplikasi lain, data yang dikirim ke API tersebut harus tetap bersih dan tervalidasi.
+4. Bergantung sepenuhnya pada pembersihan di frontend dapat menghasilkan data yang tidak valid di backend jika pengguna mematikan JavaScript atau menggunakan alat yang dapat menghindari pemeriksaan di frontend.
